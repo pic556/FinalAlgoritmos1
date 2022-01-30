@@ -1,4 +1,4 @@
-Ejercicio 1. 
+Ejercicio 1.
 Evaluar las s<gu<entes expres<ones:
 
 a) |<4, 3, 1>| = 3
@@ -94,7 +94,7 @@ pred todoEsMultiplo(s:seq<ℤ>){
 (∀i:ℤ)(0≤i<|s| →L (∃j:ℤ)(0≤j≠i<|s| ∧L s[i] mod s[j] == 0 )
 }
 m) enTresPartes, que determina si en la secuencia aparecen (de izquierda a derecha) primero 0s, despues 1s y por ultimo 2s. Por
-ejemplo h0, 0, 1, 1, 1, 1, 2i cumple con enTresPartes, pero h0, 1, 3, 0i o h0, 0, 0, 1, 1i no. ¿Como modificarıa la expresion para que
+ejemplo h0, 0, 1, 1, 1, 1, 2i , cumple con enTresPartes, pero h0, 1, 3, 0i o h0, 0, 0, 1, 1i no. ¿Como modificarıa la expresion para que
 se admitan cero apariciones de 0s, 1s y 2s (es decir, para que por ejemplo h0, 0, 0, 1, 1i o hi sı cumplan enTresPartes)?
 m) pred enTresPartes (s : seqhZi) {estaOrdenada(s)
 ∧ (∀i : Z)(0 ≤ i ≤ 2 ↔ i ∈ s)
@@ -120,15 +120,15 @@ d) aux agregarTresCeros(s : seq<Z>) : seq<Z>. Que agrega 3 ceros al final de la 
  	 aux agregarTresCeros(s : seq<Z>) : seq<Z>=
 	 s + <0,0,0>
 e) aux agregarNCeros(s : seq<Z>, n : Z) : seq<Z>. Que agrega n ceros al final de la secuencia s.
-	 no se puede 
+	 no se puede
 f) aux sumarUno(s : seq<Z>) : seq<Z>. Que suma 1 a cada uno de los elementos de la secuencia s.
 	 (∀i)(0 ≤ i < |s| ⇒L s[i] = s[i]+1)
 g) aux ordenar(s : seq<Z>) : seq<Z>. Que ordena la lista de menor a mayor.
 	uso la funcion ordenar,
-	
+
 Ejercicio 6.  Sean P(x : Z) y Q(x : Z) dos predicados cualesquiera que nunca se indefinen y sea s una secuencia de enteros.
-Escribir el predicado asociado a cada uno de los siguientes enunciados:	
-	
+Escribir el predicado asociado a cada uno de los siguientes enunciados:
+
 a) “Si un entero en s cumple P, tambien cumple Q”
 (∃x ∈ S)(P(x)⇒L Q(x))
 b) “Todos los enteros de s que cumplen P, no cumplen Q”
