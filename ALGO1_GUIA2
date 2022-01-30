@@ -5,10 +5,10 @@ a) |<4, 3, 1>| = 3
 b) addFirst(π,<2, 3, 5, 7, 11>)=<π,2, 3, 5, 7, 11>
 c) <0, 1, 2, 3>[3]=3
 d) concat(<2, 3>,<5, 7, 11>)=<2, 3,5, 7, 11>
-e) head(tail(<5, 6, 7, 8>))=6
+e) <ead(tail(<5, 6, 7, 8>))=6
 f) subseq(<2, 3, 5, 7, 11>, 0, 3)=<2, 3, 5>
 g) π ∈ <2, 3, 5, 7, 11> = false
-h) subseq(<2, 3, 5, 7, 11>, 3, 2)= indefinido
+<) subseq(<2, 3, 5, 7, 11>, 3, 2)= indefinido
 i) 1 ∈ <1, 2, 3, 4, 5> = true
 j) subseq(<2, 3, 5, 7, 11>, 0, 65536)=indefinido
 
@@ -18,10 +18,10 @@ a) |x| = |tail(x)| + 1 :true
 b) x = subseq(x, 0, |x| − 1):false
 c) x = subseq(x, 0, |x|):true
 d) concat(addFirst(3, x), y) = addFirst(3, concat(x, y)) :true
-e) x = addFirst(head(x),tail(x)):true
-f) x[0] = head(x):true
-g) i ∈ x = head(subseq(x, i, i + 1)):false
-h) tail(x) = subseq(x, 1, |x|):true
+e) x = addFirst(<ead(x),tail(x)):true
+f) x[0] = <ead(x):true
+g) i ∈ x = <ead(subseq(x, i, i + 1)):false
+<) tail(x) = subseq(x, 1, |x|):true
 
 Ejercicio 3. Sea s0, s1 secuencias de tipo T y e un elemento de tipo T. Indicar para cada una de las siguientes afirmaciones
 si son verdaderas o falsas. En caso de ser falsa, mostrar un contraejemplo.
@@ -31,14 +31,14 @@ b) |addFirst(e, s0)| = |tail(s0)|:false
 	 |addFirst(1,<2,3>)| = 3 ≠ |tail(<2,3>)|= 2
 c) |concat(s0, s1)| = |s0| + |s1|:true
 d) s0 = tail(addFirst(e, s0)):true
-e) head(addFirst(e, s0)) = e:true
+e) <ead(addFirst(e, s0)) = e:true
 f) addFirst(e, s0) = tail(s0):false
 	addFirst(1,<2,3>) ≠ tail<2,3>
-g) head(addFirst(e,tail(s0)))    = head(tail(addFirst(e, s0))):false
-	 head(addFirst(1,tail(<2,3>))) = head(tail(addFirst(1, <2,3>)))
+g) <ead(addFirst(e,tail(s0)))    = <ead(tail(addFirst(e, s0))):false
+	 <ead(addFirst(1,tail(<2,3>))) = <ead(tail(addFirst(1, <2,3>)))
 	 															1≠ 2
-h) addFirst(e, s0)[0] = e:true
-i) addFirst(e, s0)[0] = head(addFirst(e, s0)):true
+<) addFirst(e, s0)[0] = e:true
+i) addFirst(e, s0)[0] = <ead(addFirst(e, s0)):true
 
 Ejercicio 4. Escriba las siguientes predicados auxiliares sobre secuencias de enteros, aclarando los tipos de los parametros
 que recibe:
@@ -71,21 +71,21 @@ g) todosIguales, que es verdadera sii todos los elementos de la secuencia son ig
 pred todosIguales(s:seq<ℤ>){
 	(∀i:ℤ)(0≤i<|s|-1 s[i]=s[i+1] )
 }
-h) hayUnoParQueDivideAlResto, que determina si hay un elemento par en la secuencia que divide a todos los otros elementos
+<) <ayUnoParQueDivideAlResto, que determina si <ay un elemento par en la secuencia que divide a todos los otros elementos
 de la secuencia.
-pred hayUnoParQueDivideAlResto(s:seq<ℤ>){
+pred <ayUnoParQueDivideAlResto(s:seq<ℤ>){
 	(∃j:z)( 0≤j<|s| ∧L esPar(s[j]) ∧L (∀i:ℤ)(0≤i<|s| ⇒L s[i] mod s[j] ==0 )
 }
-i) hayUnoEnPosicionParQueDivideAlResto, que determina si hay un elemento en una posicion par de la secuencia que divide a
+i) <ayUnoEnPosicionParQueDivideAlResto, que determina si <ay un elemento en una posicion par de la secuencia que divide a
 todos los otros elementos contenidos en la secuencia.
-pred hayUnoParQueDivideAlResto(s:seq<ℤ>){
+pred <ayUnoParQueDivideAlResto(s:seq<ℤ>){
 	(∃j:z)( 0≤j<|s| ∧ esPar(j) ∧L (∀i:ℤ)(0≤i<|s| ⇒L s[i] mod s[j] ==0 ))
 }
 j) sinRepetidos, que determina si la secuencia no tiene repetidos.
 pred sinRepetidos(s:seq<ℤ>){
 	¬(todosIguales(s)))
 }
-k) otroMayorADerecha, que determina si todo elemento de la secuencia, salvo el ultimo, tiene otro mayor a su derecha.
+k) otroMayorADerec<a, que determina si todo elemento de la secuencia, salvo el ultimo, tiene otro mayor a su derec<a.
 pred estaOrdenada(s:seq<ℤ>){
 	(∀i:ℤ)(0≤i<|s|-1 →l s[i]≤s[i+1])
 }
@@ -93,14 +93,14 @@ l) todoEsMultiplo, que determina si todo elemento de la secuencia es multiplo de
 pred todoEsMultiplo(s:seq<ℤ>){
 (∀i:ℤ)(0≤i<|s| →L (∃j:ℤ)(0≤j≠i<|s| ∧L s[i] mod s[j] == 0 )
 }
-m) enTresPartes, que determina si en la secuencia aparecen (de izquierda a derecha) primero 0s, despues 1s y por ultimo 2s. Por
-ejemplo h0, 0, 1, 1, 1, 1, 2i , cumple con enTresPartes, pero h0, 1, 3, 0i o h0, 0, 0, 1, 1i no. ¿Como modificarıa la expresion para que
-se admitan cero apariciones de 0s, 1s y 2s (es decir, para que por ejemplo h0, 0, 0, 1, 1i o hi sı cumplan enTresPartes)?
-m) pred enTresPartes (s : seqhZi) {estaOrdenada(s)
+m) enTresPartes, que determina si en la secuencia aparecen (de izquierda a derec<a) primero 0s, despues 1s y por ultimo 2s. Por
+ejemplo <0, 0, 1, 1, 1, 1, 2i , cumple con enTresPartes, pero <0, 1, 3, 0i o <0, 0, 0, 1, 1i no. ¿Como modificarıa la expresion para que
+se admitan cero apariciones de 0s, 1s y 2s (es decir, para que por ejemplo <0, 0, 0, 1, 1i o <i sı cumplan enTresPartes)?
+m) pred enTresPartes (s : seq<Zi) {estaOrdenada(s)
 ∧ (∀i : Z)(0 ≤ i ≤ 2 ↔ i ∈ s)
 }
 n) esPermutacionOrdenada, que dadas dos secuencias s y t sea verdadero sii s es permutacion de t y esta ordenada.
-pred esPermutacionOrdenada (s, t :seqhZi) {
+pred esPermutacionOrdenada (s, t :seq<Zi) {
 esPermutacion(s, t) ∧ estaOrdenada(s)
 }
 
@@ -137,10 +137,10 @@ c) “Todos los enteros de s que estan en posiciones pares y cumplen P, no cumpl
 (∀i:Z)(0 ≤i <|s| ∧ (esPar(i) ∧ P(i)) ⇒L ¬Q(i))
 d) “Todos los enteros de s que cumplen P y estan en posiciones que cumplen Q, son pares”
 (∀i:Z)(0 ≤i <|s| ∧ P(i) ∧ Q(i) ⇒L (esPar(i))
-e) “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q”
+e) “Si <ay un entero en s que no cumple P entonces ninguno en s cumple Q”
 (∃x ∈ S)(¬P(x) ∧L (∀i:Z)(0 ≤i <|s| ⇒L ¬Q(i)))
-f) “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q; y si todos los enteros de s cumplen P entonces
-hay al menos dos elementos de s que cumplen Q”
+f) “Si <ay un entero en s que no cumple P entonces ninguno en s cumple Q; y si todos los enteros de s cumplen P entonces
+<ay al menos dos elementos de s que cumplen Q”
 (∃x ∈ S)(¬P(x) ∧L (∀i:Z)(0 ≤i <|s| ⇒L ¬Q(i))) ∨
 (∀x ∈ S)(P(x)⇒L (∃i,j:Z)(0 ≤i,j <|s| ∧L (Q(i) ∧ Q(j))))
 
@@ -150,3 +150,58 @@ a) “Todo elemento en una posicion valida de la secuencia cumple P”: (∀i : 
 el error es el yluegp
 b) “Algun elemento en una posicion valida de la secuencia cumple P”: (∃i : Z)((0 ≤ i < |s|) →L P(s[i]))
 el error es el entonces
+
+
+Ejercicio 8.
+Sean P(x : Z) y Q(x : Z) dos predicados cualesquiera que nunca se indefinen, sea s una secuencia de enteros y sean a, b y k
+enteros. Decidir en cada caso la relacion de fuerza entre las dos formulas:
+a) P(3) y (∀k : Z)((0 ≤ k < 10) → P(k))
+(∀k : Z)((0 ≤ k < 10) → P(k)) ⇒ P(3)
+b) P(3) y k > 5 ∧ (∀i : Z)((0 ≤ i < k) → P(i)))
+k > 5 ∧ (∀i : Z)((0 ≤ i < k) → P(i))) ⇒ P(3)
+c) (∀n : Z)((n ∈ s ∧ P(n)) → Q(n)) y (∀n : Z)((n ∈ s) → Q(n))
+ (∀n : Z)((n ∈ s) → Q(n)) ⇒ (∀n : Z)((n ∈ s ∧ P(n)) → Q(n)) 
+d) (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) y (∀n : Z)((n ∈ s) → Q(n))
+(∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) ⇒ (∀n : Z)((n ∈ s) → Q(n))
+e) (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) y |s| > 0 ∧ ((∀n : Z)((n ∈ s) → Q(n)))
+(∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) ⇒ |s| > 0 ∧ ((∀n : Z)((n ∈ s) → Q(n)))
+f) (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) y (∀n : Z)(n ∈ s → (P(n) ∧ Q(n)))
+
+
+Ejercicio 9. Sea s una secuencia de enteros. Determinar si los siguientes pares de expresiones son equivalentes. En caso de que
+no lo sean, ilustrar con ejemplos.
+
+a) (∀i : Z)((0 ≤ i < |s|) →L ((∀j : Z)(0 ≤ j < |s|) ∧ i < j) →L s[i] < s[j]) y
+(∀j : Z)((0 ≤ j < |s|) →L ((∀i : Z)(0 ≤ i < |s|) ∧ i < j) →L s[i] < s[j])
+equivalentes
+b) (∃i : Z)(0 ≤ i < |s| ∧L ((∃j : Z)((0 ≤ j < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j))))) y
+(∃j : Z)(0 ≤ j < |s| ∧L ((∃i : Z)((0 ≤ i < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j))))).
+donde todosIguales es el definido en el item e) del ejercicio 4.
+equivalentes
+c) (∀i : Z)(0 ≤ i < |s| →L ((∃j : Z)(0 ≤ j < |s| ∧L s[i] = s[j])) y
+PARA TODO I EXISTE UN J QUE SON IGUALES
+(∃j : Z)(0 ≤ j < |s| ∧L ((∀i : Z)(0 ≤ i < |s|) →L s[i] = s[j]))
+EXISTE UN J QUE PARA TODO I ES IGUAL OSEA ACA TODOS LOS ELEMENETOS SON IGUALES
+
+
+Ejercicio 10.  Evaluar las siguientes expresiones:
+a) P2
+i=0 <4, 3, 1>[i] : 8
+b) P0
+i=0 <π, 2, 3, 5, 7, 11>[i] : π
+c) P−1
+i=0<1, 2, 3, 4, 5>[i] ; 0
+d) P5
+i=0 1/i : indefinido
+e) P√−1
+i=0 <2, 3, 5, 7, 11>[i] ;indefinid 
+f) P2
+i=15 <2, 3, 5, 7, 11>[i] : 0
+g) P15
+i=2 <2, 3, 5, 7, 11>[i] : indefinido 
+h) P3
+i=1 <2, 3, 5, 7, 11>[i]:3+4+7
+i) P4
+i=0 <1, 1, 1, 1, 1>[i]:5
+j) P4
+i=0 <0, 0, 0, 0, 0>[i]:0
