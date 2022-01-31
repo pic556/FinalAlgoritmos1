@@ -205,3 +205,33 @@ i) P4
 i=0 <1, 1, 1, 1, 1>[i]:5
 j) P4
 i=0 <0, 0, 0, 0, 0>[i]:0
+
+Ejercicio 11.  Escribir un predicado que usando sumatorias indique si un numero entero es primo .
+pred esprimo(n:Z){
+	n > 0 ∧ (sum(1,n,i): if n mod i == 0 then 1 else 0 fi) = 2
+}
+
+
+Ejercicio 12. Sea s una secuencia de elementos de tipo Z. Escribir una expresion tal que:
+a) Cuente la cantidad de veces que aparece el elemento e de tipo Z en la secuencia s.
+sum(s,0,|s|-1,i)if s[i]==e then 1 else 0 endif
+b) Sume los elementos en las posiciones impares de la secuencia s.
+sum(s,0,|s|-1,i)if i mod 2 != 0 then s[i] else 0 endif
+c) Sume los elementos mayores a 0 contenidos en la secuencia s.
+sum(s,0,|s|-1,i)if s[i] ≥ 0 then s[i] else 0 endif
+d) Sume los inversos multiplicativos (1/x) de los elementos contenidos en la secuencia s distintos a 0.
+sum(s,0,|s|-1,i)if s[i]!=0 then 1/s[i] else 0 endif
+e) Cuente la cantidad de elementos primos no repetidos en la secuencia s.
+sum(s,0,|s|-1,i)if esprimo(s[i]) ∧ apariciones(s,s[i])==1 then 1 else 0 endif
+
+Ejercicio 13. Escribir un predicado que indique si una secuencia es permutacion de otra secuencia. Una secuencia es permutacion
+de otra secuencia si ambas secuencias poseen los mismos elementos y la misma cantidad de apariciones por elemento. Ejemplos:
+<1, 2, 3> es permutacion de <3, 2, 1>
+<1, 2, 3> es permutacion de <1, 2, 3>
+<1, 1, 2, 3> es permutacion de <3, 2, 1, 1>
+<1, 2, 3> no es permutacion de <1, 1, 3>
+<1, 1, 2, 3> es permutacion de <1, 3, 2, 1>
+
+pred espermutacion(s1,s2:seq<Z>){
+	(∀i:z)(0 ≤ i < |s1| ⇒L  (#apariciones(s2,s1[i]) = #apariciones(s1,s1[i]) ∧ |s1|=|s2|) )
+}
