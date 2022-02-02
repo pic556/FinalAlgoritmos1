@@ -1,0 +1,68 @@
+Ejercicio 1.  Las siguientes especificaciones no son correctas. Indicar por que, y corregirlas para que describan correctamente
+el problema.
+a) buscar: Dada una secuencia y un elemento de esta, devuelve en result alguna posicion de la secuencia en la cual se encuentre
+el elemento.
+proc buscar (in l: seq<R>, in elem: R, out result: Z) {
+Pre {elem ∈ l}
+Post {0 ≤ result < |l| ∧L	
+	l[result] = elem}
+}
+b) progresionGeometricaFactor2: Indica si la secuencia l representa una progresion geometrica factor 2. Es decir, si cada
+elemento de la secuencia es el doble del elemento anterior.
+proc progresionGeometricaFactor2 (in l: seqhZi, out result: Bool) {
+Pre {T rue}
+Post {result = True ↔ ((∀i : Z)(0 ≤ i < |l|-1 →L l[i] = 2 ∗ l[i + 1]))}
+}
+c) minimo: Devuelve en result el menor elemento de l.
+proc minimo (in l: seqhZi, out result: Z) {
+Pre {True}
+Post {(∀i : Z)(0 ≤i <|l|) →L (∃ result)(0 ≤ result <|l| l[i] => result))}
+}
+
+Ejercicio 2. La siguiente no es una especificacion valida, ya que para ciertos valores de entrada que cumplen la precondicion,
+no existe una salida que cumpla con la postcondicion.
+proc elementosQueSumen (in l: seq<Z>, in suma:Z, out result: seq<Z>) {
+Pre {True}
+Post {
+/* La secuencia result esta incluıda en la secuencia l*/
+(∀x : Z)(x ∈ result → #apariciones(x, result) ≤ #apariciones(x, l))
+/* La suma de la result coincide con el valor suma */
+∧ suma=sum(|result|−1,0,i) result[i]}
+}
+a) Mostrar valores para l y suma que hagan verdadera la precondicion, pero tales que no exista result que cumpla la postcondicion.
+
+l=[1,2,3]
+suma=3
+result[1,2]
+
+l=[]
+suma=1
+suma de result = 0 
+
+b) Supongamos que agregamos a la especificacion la siguiente clausula:
+Pre : min suma(l) ≤ suma ≤ max suma(l)
+fun min suma(l) : Z =
+|l|−1
+i=0 if l[i] < 0 then l[i] else 0 fi
+fun max suma(l) : Z =
+|l|−1
+i=0 if l[i] > 0 then l[i] else 0 fi
+¿Ahora es una especificacion valida? Si no lo es, justificarlo con un ejemplo como en el punto anterior 
+
+se rompen con 
+l=[1,3]
+suma=2
+
+c) Dar una precondici´on que haga correcta la especificaci´on.
+|l| ≥ 1 ∧l suma ≤ maximo(l)
+
+
+
+Ejercicio 3. Para los siguientes problemas, dar todas las soluciones posibles a las entradas dadas.
+a) proc raizCuadrada (in x:R, out result:R) {
+Pre {x ≥ 0}
+Post {result^2  = x}
+}
+i) x = 0 ⇒ 0
+ii) x = 1 ⇒ 1 and -1
+iii) x = 27 ⇒ sqrt(27) , -sqrt(27)
