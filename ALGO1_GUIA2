@@ -235,3 +235,37 @@ de otra secuencia si ambas secuencias poseen los mismos elementos y la misma can
 pred espermutacion(s1,s2:seq<Z>){
 	(∀i:z)(0 ≤ i < |s1| ⇒L  (#apariciones(s2,s1[i]) = #apariciones(s1,s1[i]) ∧ |s1|=|s2|) )
 }
+
+
+Ejercicio 14.  Sea m una secuencia de secuencias de tipo Z, escribir una expresion tal que:
+a) Sume los elementos contenidos en todas las secuencias.
+aux sumacontenidodesecunecia(m: seq<seq<ℤ>>):Z{
+	sum(m,0,|m|-1,i)(sum(m[i],0,|m[i]|-1,j)(m[i][j]))
+}
+b) Cuente la cantidad de secuencias vacıas
+aux #secuneciavacias(m: seq<seq<ℤ>>):Z{
+	sum(m,0,|m|-1,i)if |m[i]|==0 then 1 else 0 fi
+}
+c) Sume el valor del ultimo elemento de cada secuencia no vacıa
+aux #sumarelementodelasecunecianovacia(m: seq<seq<ℤ>>):Z{
+	sum(m,0,|m|-1,i)if |m[i]|!=0 then m[i][|i|-1] else 0 fi
+}
+d) Retorne True sii todas las secuencias poseen el mismo tamaño.
+pred secuenciasigualdelarga(m: seq<seq<ℤ>>):Z{
+	∀i:z)(0≤i<|s|-1 ⇒L |m[i]|==|m[i+1]|)
+}
+e) Retorne la suma de todas las posiciones impares de cada secuencia.
+aux sumatodoslosimparesdelasecunecia(m: seq<seq<ℤ>>):Z{
+	sum(m,0,|m|-1,i)(sum(m[i],0,|m[i]|-1,j) (if j mod 2 == 1 then m[i][j]else 0 fi; ))
+}
+
+
+Ejercicio 15. Sea s un String, escribir una expresi´on que cuente la cantidad de apariciones del caracter vacıo (’ ’)
+aux aparisCaracterVacio (s : String) : Z = sum(s,0,|s|-1,i)if s[i] = " " then 1 else 0 fi;
+
+Ejercicio 16. F Sea s un String, escribir una expresi´on que cuente la cantidad de apariciones de un d´ıgito (caracteres ’0’ al
+’9’).
+
+digitos = h‘0‘, ‘1‘, ‘2‘, ‘3‘, ‘4‘, ‘5‘, ‘6‘, ‘7‘, ‘8‘, ‘9‘i
+P|s|−1
+i=0 if s[i] ∈ digitos then 1 else 0 fi
