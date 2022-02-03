@@ -66,3 +66,128 @@ Post {result^2  = x}
 i) x = 0 ⇒ 0
 ii) x = 1 ⇒ 1 and -1
 iii) x = 27 ⇒ sqrt(27) , -sqrt(27)
+
+
+proc indiceDelMaximo (in l: seqhRi, out result:Z) {
+Pre {|l| > 0}
+Post {
+0 ≤ result < |l|
+∧L ((∀i : Z)(0 ≤ i < |l| →L l[i] ≤ l[result])}
+}
+
+i) l = h1, 2, 3, 4i   ⇒  3
+ii) l = h15.5, −18, 4.215, 15.5, −1i ⇒ 0 ,3
+iii) l = h0, 0, 0, 0, 0, 0i ⇒ 0,1..5 
+
+c) 
+proc indiceDelPrimerMaximo (l:seqhRi, result:Z) {
+Pre {|l| > 0}
+Post {
+0 ≤ result < |l|
+∧ ((∀i : Z)(0 ≤ i < |l| →L (l[i] < l[result] ∨ (l[i] = l[result] ∧ i ≥ result))))}
+}
+i) l = h1, 2, 3, 4i ⇒ 3
+ii) l = h15.5, −18, 4.215, 15.5, −1i ⇒0
+iii) l = h0, 0, 0, 0, 0, 0i ⇒0
+
+
+Ejercicio 4. F Sea f : R × R → R definida como:
+				
+					| 2b si a < 0
+f(a, b) = | b − 1 en otro caso
+
+¿Cuales de las siguientes especificaciones son correctas para el problema de calcular f(x, y)?
+Para las que no lo son, indicar por que
+
+a) proc f (in a, b:R ,out result:R) {
+Pre {True}
+Post {
+(a < 0 ∧ result = 2 ∗ b)
+∧
+(a ≥ 0 ∧ result = b − 1)
+}
+}
+sera falso ,debe haber un ∨ no un ∧
+
+b) proc f (in a, b: R, out result:R) {
+Pre {True}
+Post {(a < 0 ∧ result = 2 ∗ b) ∨ (a > 0 ∧ result = b − 1)}
+}
+incorrecto
+
+c) proc f (in a, b: R, out result:R) {
+Pre {T rue}
+Post {(a < 0 ∧ result = 2 ∗ b) ∨ (a ≥ 0 ∧ result = b − 1)}
+}
+correcto 
+
+d) proc f (in a, b: R, out result:R) {
+Pre {T rue}
+Post {
+a < 0 → result = 2 ∗ b
+∧
+a ≥ 0 → result = b − 1
+}
+}
+incorrecto
+
+e) proc f (in a, b: R, out result:R) {
+Pre {T rue}
+Post {(a < 0 → result = 2 ∗ b) ∨ (a ≥ 0 → result = b − 1)}
+}
+incorrecto
+
+f) proc f (in a, b: R, out result: R) {
+Pre {T rue}
+Post {result = (if a < 0 then 2 ∗ b else b − 1 fi)}
+}
+correcto 
+
+
+Ejercicio 5. Considerar la siguiente especificacion, junto con un algoritmo que dado x devuelve x^2
+
+proc unoMasGrande (in x: R, out result:R) {
+Pre {T rue}
+Post {result > x}
+}
+a) ¿Que devuelve el algoritmo si recibe x = 3? ¿El resultado hace verdadera la postcondicion de unoMasGrande?
+devuelve 9 y hace verdadera
+b) ¿Que sucede para las entradas x = 0.5, x = 1, x = −0.2 y x = −7?
+da 0.25 pero no cumple postcondicion, 1 da 1 no cumple posticoindcion ,da 49 y cumple postcondicon
+c) Teniendo en cuenta lo respondido en los puntos anteriores, escribir una precondicion para unoMasGrande, de manera tal que
+el algoritmo sea una implementacion correcta.
+pre{x>1 ∨ x≤-1 }
+
+
+Ejercicio 6.  Sean x y r variables de tipo R. Considerar los siguientes predicados:
+
+P1: {x ≤ 0} 		Q1: {r ≥ x^2}
+P2: {x ≤ 10} 		Q2: {r ≥ 0}
+P3: {x ≤ −10}   Q3: {r = x^2}
+
+a) Indicar la relaci´on de fuerza entre P1, P2 y P3.
+P3 > P1 > P2
+b) Indicar la relaci´on de fuerza enrte Q1, Q2 y Q3.
+Q3 > Q1 > Q2
+
+c) Sea E1 la siguiente especificaci´on. Escribir 2 programas que cumplan con E1.
+proc hagoAlgo (in x: R, out r:R) {
+Pre {x ≤ 0}
+Post {r ≥ x^2}
+}
+
+f(x:R){
+	result = x * x 
+	return result 
+}
+r : = (x − 1)^2 , r := x^2
+
+d) Sea A un algoritmo que cumple con E1. Decidir si necesariamente cumple las siguientes especificaciones:
+a) Pre: {x ≤ −10}, Post: {r ≥ x^2}si
+b) Pre: {x ≤ 10}, Post: {r ≥ x^2}no
+c) Pre: {x ≤ 0}, Post: {r ≥ 0}si
+d) Pre: {x ≤ 0}, Post: {r = x^2}no
+e) Pre: {x ≤ −10}, Post: {r ≥ 0}si
+f ) Pre: {x ≤ 10}, Post: {r ≥ 0}no
+g) Pre: {x ≤ −10}, Post: {r = x^2}no
+h) Pre: {x ≤ 10}, Post: {r = x^2}no
