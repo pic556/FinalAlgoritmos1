@@ -191,3 +191,96 @@ e) Pre: {x ≤ −10}, Post: {r ≥ 0}si
 f ) Pre: {x ≤ 10}, Post: {r ≥ 0}no
 g) Pre: {x ≤ −10}, Post: {r = x^2}no
 h) Pre: {x ≤ 10}, Post: {r = x^2}no
+
+
+Ejercicio 7.  Considerar las siguientes dos especificaciones, junto con un algoritmo a que satisface la especificacion de p2.
+
+proc p1 (in x: R, in n: Z, out result:Z) {
+Pre {x ≠ 0}
+Post {x^(n)− 1 < result ≤ x^n}
+}
+proc p2 (in x: R, in n: Z, out result:Z) {
+Pre {n ≤ 0 → x ≠ 0}
+Post {result = parteEntera(x^n)}
+}
+
+a) Dados valores de x y n que hacen verdadera la precondicion de p1, demostrar que hacen tambien verdadera la precondicion
+de p2.
+si x ≠ 0 entonces en el pre de p2 el n tiene que se menor a 0 y no hay restricion asi que esta bien 
+b) Ahora, dados estos valores de x y n, supongamos que se ejecuta a: llegamos a un valor de res que hace verdadera la
+postcondicion de p2. ¿Sera tambien verdadera la postcondicion de p1?
+cumple
+c) ¿Podemos concluir que a satisface la especificacion de p1?
+si x=2 y n=-1 
+1/2 result 1/2 falso 
+
+Ejercicio 8. Considerar las siguientes especificaciones:
+proc n-esimo1 (in l: seqhZi, in n: Z, out result: Z) {
+Pre {
+/*Los elementos estan ordenados*/
+(∀i : Z)(0 ≤ i < |l| − 1 →L l[i] < l[i + 1]) ∧ 0 ≤ n < |l|}
+Post {result = l[n]}
+}
+
+
+proc n-esimo2 (in l: seqhZi, in n: Z, out result:Z) {
+Pre {
+/*Los elementos son distintos entre sı*/
+(∀i : Z)(0 ≤ i < |l| →L ((∀j : Z)(0 ≤ j < |l| ∧ i != j) →L l[i] != l[j]))
+∧
+0 ≤ n < |l|}
+Post {
+result ∈ l
+∧
+n =sum(l,0,|l|-1,i)(if l[i] < result then 1 else 0 fi)}
+}
+¿Es cierto que todo algoritmo que cumple con n-esimo1 cumple tambi´en con n-esimo2? ¿Y al rev´es?
+Si un algoritmo cumple la pre de p1, entonces cumple la de p2. Ya que una lista ordenada
+tiene todos elementos distintos, y ambos aseguran que 0 ≤ n < |l|. Pero si cumple la pre de
+p2 no necesariamente cumple la de p1 (ej.: h1, 3, 2i).
+Y la post de p1 tambi´en cumple p2. Porque la sumatoria de p2 est´a preguntando cu´antos
+n´umeros menores a result hay, que es lo mismo que la posici´on de la secuencia ordenada
+
+Ejercicio 9. F Especificar los siguientes problemas:
+a) Dado un numero entero, decidir si es par.
+proc esPar (in n: Z, out res: Bool) {
+Pre {T rue}
+Post {eje_a(n)}
+}
+pred eje_a(x:Z){
+	x mod 2 == 0
+}
+b) Dado un entero n y uno m, decidir si n es un multiplo de m.
+proc esMultiplo (in n, m: Z, out res: Bool) {
+Pre {T rue}
+Post {eje_b(n,m)}
+}
+pred eje_b(n,m:Z){
+	n mod m == 0
+}
+c) Dado un numero real, devolver su inverso multiplicativo.
+c) proc inverso (in x: R, out res: R) {
+Pre {x != 0}
+Post {res = inv_mul(x) }
+}
+aux inv_mul(x:R):R = (if x==0 then 0 else 1/x)
+d) Dada una secuencia de caracteres, obtener de ella solo los que son numericos (con todas sus apariciones sin importar el orden
+de aparicion).
+d) proc obtenerNumericos ( in l : seqhChari, out lis : seqhChari) {
+Pre {T rue}
+Post {(∀c : Char) ( (ord(‘0‘) ≤ ord(c) ≤ ord(‘9‘) → apariciones(c, l) ==
+apariciones(c, lis)) ∧ (c ∈ lis → ord(‘0‘) ≤ ord(c) ≤ ord(‘9‘) ))}
+}
+e) Dada una secuencia de reales, devolver la secuencia que resulta de duplicar sus valores en las posiciones impares
+proc dupl_imp(in s: seq<R> ,out res:seq<R>){
+	pre{True}
+	post{ |s|=|res| ∧L
+	(∀i:z)(0 ≤ i < |s| ⇒L  
+		if i mod 2 == 0 then s[i]=res[i] else res[i]=s[i]*2
+		}
+}
+f) Dado un numero entero, listar todos sus divisores positivos (sin duplicados).
+proc divisoresPositivos (in n: Z, out res: seqhZi) {
+Pre {T rue}
+Post {sinRepetidos(res) ∧ (∀i : Z)((i > 0 ∧L n m´od i == 0) ↔ i ∈ res)}
+}
