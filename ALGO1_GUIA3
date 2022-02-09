@@ -284,3 +284,48 @@ proc divisoresPositivos (in n: Z, out res: seqhZi) {
 Pre {T rue}
 Post {sinRepetidos(res) ∧ (∀i : Z)((i > 0 ∧L n m´od i == 0) ↔ i ∈ res)}
 }
+
+
+Ejercicio 10. Considerar el problema de decidir, dados n y m enteros, si n es m´ultiplo de m, y la siguiente especificaci´on.
+proc esMultiplo (in n, m: Z, out result:Bool) {
+Pre {m != 0}
+Post {result = (n mod m == 0)}
+}
+a) Segun la definicion matematica de multiplo, ¿tiene sentido preguntarse si 4 es multiplo de 0? ¿Cual es la respuesta?
+no tiene
+b) ¿Deberıa ser n = 4, m = 0 una entrada valida para el problema? ¿Lo es en esta especificacion?
+el problema deberia dar false ,la especificacion aca ni entra
+
+c) Corregir la especificacion de manera tal que n = 4, m = 0 satisfaga la precondicion (¡cuidado con las indefiniciones!).
+res==n*k=m
+d) ¿Que relacion de fuerza hay entre la precondicion nueva y la original?
+la original es mas fuerte debido a que si se cancela esta daria verdadero ,en cambio una da verdadero siempre pero la otra no 
+
+
+Ejercicio 11. Considerar el problema de, dada una secuencia de n´umeros reales, devolver la que resulta de duplicar sus valores
+en las posiciones impares.
+a) Para la secuencia h1, 2, 3, 4i, ¿es h0, 4, 0, 8i un resultado correcto?NO 
+b) Sea la siguiente especificaci´on:
+proc duplicarEnImpares (in l: seqhRi, out result: seqhRi) {
+Pre {T rue}
+Post {|result| = |l| ∧L (∀i : Z)((0 ≤ i < |result| ∧ i m´od 2 == 1) →L result[i] == l[i]*2)}
+}
+d) ¿Qu´e relaci´on de fuerza hay entre la nueva postcondici´on y la original?NINGUNA 
+
+
+Ejercicio 12. F Especificar el problema de dado un entero positivo retornar una secuencia de 0s y 1s que represente ese n´umero
+en base 2 (es decir, en binario).
+pred solo0Y1 (res: seqhZi) {
+(∀i : Z)(0 ≤ i < |res| −→L res[i] == 0 ∨ res[i] = 1)
+}
+
+aux binADec (res: seqhZi) : Z =
+P|res|−1
+i=0 2
+|res|−1−i
+· res[i] ;
+
+proc esBinario (in n: Z, out res: seqhZi) {
+Pre {0 ≤ n}
+Post {solo0Y 1(res) ∧ n == binADec(res)}
+}
