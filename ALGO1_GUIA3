@@ -329,3 +329,171 @@ proc esBinario (in n: Z, out res: seqhZi) {
 Pre {0 ≤ n}
 Post {solo0Y 1(res) ∧ n == binADec(res)}
 }
+
+
+
+Ejercicio 13. Con lo visto en los ejercicios 9 a 12, ¿Encuentra casos de sub y sobreespecificaci´on en las especificaciones del
+ejercicio 8?
+sobreespcificado la pre y sub la post
+
+
+Ejercicio 14. Especificar los siguientes problemas:
+a) F Dado un numero entero positivo, obtener la suma de sus factores primos.
+suma_factores_primos(in x:Z , result:R){
+	pre{ x≥1}
+	post{res = sum(1,x,i) if esprimo(i) and x mod i == 0 then i else 0 fi}
+}
+b) Dado un numero entero positivo, decidir si es perfecto. Se dice que un numero es perfecto cuando es igual a la suma de sus
+divisores (excluyendose a sı mismo).
+perfecto(in x:Z , out result:bool){
+	pre{ x≥1}
+	post{x = sum(1,x,i) if x mod i == 0 then i else 0 fi}
+}
+c) Dado un numero entero positivo n, obtener el menor entero positivo m > 1 tal que m sea coprimo con n.
+perfecto(in n:Z , out m:Z){
+	pre{ n>0}
+	post{ {m > 1∧sonCoprimos(n, m)∧L(∄m : Z)(2 ≤ m < res ∧sonCoprimos(n, m)) }
+}
+d) F Dado un entero positivo, obtener su descomposicion en factores primos. Devolver una secuencia de tuplas (p, e), donde p
+es un factor primo y e es su exponente, ordenada en forma creciente con respecto a p.
+suma_factores_primos(in x:Z , res:seq(ZxZ){
+	pre{ x≥1}
+	post{(∀i:Z)(0 ≤ i < x ∧ esprimo(i) ∧ x mod i  == 0 ⇒L 
+		(∃e:Z)( x mod i ^ e == 0 ∧ <i,e> ∈ res  }
+}
+e) Dada una secuencia de numeros reales, obtener la diferencia maxima entre dos de sus elementos.
+secuenc_dif_max(in s:seq<Z> , out res:Z){
+	pre{ |s|>0}
+	post{res = maximoValoren(s)-minimoValoren(s)}
+}
+f) F Dada una secuencia de numeros enteros, devolver aquel que divida a mas elementos de dicha secuencia. El elemento tiene
+que pertenecer a la secuencia original. Si existe mas de un elemento que cumple esta propiedad, devolver alguno de ellos.
+ele_que_mas_divida(in s:seq<Z> ,out res:Z){
+	pre{|s|>0}
+	post{(∃i:Z)((0 ≤ i < |s| ∧ esELquemasDivide(s[i],s) ⇒L res = s[i]))}
+}
+pred esELquemasDivide(n:Z , s: seq<Z>){
+	(∄j:Z)(0 ≤ j < |s| ∧L cantidad_divide(s[j],s)>cantidad_divide(n,s) )
+}
+
+aux cantidad_divide(x:Z , s :seq<Z>)= sum(0,|s|-1,i) if s[i] mod x == 0 then 1 else 0 fi;
+
+Ejercicio 15. Especificar los siguientes problemas sobre secuencias:
+a) proc nEsimaAparicion(in l : seqhRi, in e : R, in n : Z, out result : Z), que devuelve el ındice de la n-esima aparicion de e en l.
+proc nEsimaAparicion(in l : seqhRi, in e : R, in n : Z, out result : Z){
+	Pre {0 < n ≤ apariciones(e, l)}
+	Post {0 ≤ res < |l| ∧L (l[res] == e ∧ apariciones(e, subseq(l, 0, res)) == n − 1)}
+}
+b) Dadas dos secuencias s y t, decidir si s es una subcadena de t.
+proc subcadena (in s,t:seq<T> ,out res:BOOL){
+	pre{|s|<=|t|}
+	post{(∃e,j:Z)(0<=e,j<=|t| ∧L res=(subseq(t,j,e)==s))}
+}
+c) F Dadas dos secuencias s y t, decidir si s esta incluida en t, es decir, si todos los elementos de s aparecen en t en igual o
+mayor cantidad.
+proc incluida(in s,t:seq<T> , out res:BOOL){
+	pre{|s|<=|t|}
+	post{(∀i:Z)(0<=i<|s| ⇒L res=(#apariciones(s[i],t)≥#apariciones(s[i],s))}
+}
+d) proc mezclarOrdenado(in s, t : seqhZi, out result : seqhZi), que recibe dos secuencias ordenadas y devuelve el resultado de
+intercalar sus elementos de manera ordenada.
+pre{true}
+post{result=ordenar(concat(s,t)) }
+
+e) Dadas dos secuencias s y t especificar el procedimiento interseccionSinRepetidos que retorna una secuencia que contiene
+unicamente los elementos que aparecen en ambas secuencias.
+proc interseccion_sin_repetidos(in s, t : seqhZi, out result : seqhZi){
+	proc interseccionSinRepetidos ( in s,t : seqhZi, out res : seqhZi) {
+	Pre {T rue}
+	Post {sinRepetidos(res) ∧ (∀e : Z)((e ∈ s ∧ e ∈ t) ↔ e ∈ res)}
+	}
+f) F Dadas dos secuencias s y t, devolver su interseccion, es decir, una secuencia con todos los elementos que aparecen en
+ambas. Si un mismo elemento tiene repetidos, la secuencia retornada debe contener la cantidad mınima de apariciones en de
+s y de t.
+proc interseccion (in s, t: seqhTi, out res: seqhTi) {
+Pre {T rue}
+Post {(∀ele : T)(min( apariciones(ele, s), apariciones(ele, t)) == apariciones(ele, inter))}
+}
+
+Ejercicio 16. Especificar los siguientes problemas:
+a) proc cantApariciones(in l : String, out result : seqhChar × Zi) que devuelve la secuencia con todos los elementos de l, sin
+duplicados, con su cantidad de apariciones(en un orden cualquiera). Ejemplos:
+proc cantApariciones(in l : String, out result : seqhChar × Zi){
+	pre{true}
+	post{(∀i:Z)(0 ≤ i < |result|
+		⇒L (∃j:ℤ)(0 ≤ j < |l| ∧L (result[i]_0 == l[j]  ∧ result[i]_1 == cantidad(l[j],j)  ∧ sinDuplicados(res)                
+		)
+		)}
+}
+pred sinDuplicados (res: seqhChar × Zi) {
+(∀t : Char × Z)(t ∈ res −→ cantidadEnT uplas(t0, res) == 1)
+}
+aux cantidadEnTuplas (t: Char, res: seqhChar × Zi) : Z =
+P|res|−1
+i=0 if res[i]0 == t then 1 else 0 fi ;
+b) Dada una secuencia, devolver una secuencia de secuencias que contenga todos sus prefijos, en orden creciente de longitud
+aux secuenciadesecuencias(s:seq<T>):seqh seqhZi = 
+(∀:iZ)(0 ≤ i < s ⇒L subseq(0,i,s) ++ subseq(0,i+1,s))
+c) F Dada una secuencia de secuencias de enteros l, devolver una secuencia de l que contenga el m´aximo valor. Por ejemplo, si
+proc secuencia_max_val (in s:seq<seqhZi> , out res:seq<Z>)) {
+Pre {T rue}
+Post {(∃i:Z)(0 ≤ i < |s| ∧ (secuenciaconmaximovalor(s[i],s)) ∧L res=s[i])}
+}
+
+pred secuenciaconmaximovalor(m:seq<Z>,s:seq<seqhZi>){
+	∀i:z)(0 ≤ i < |s| ⇒L maximovalor(s[i]) ≤ maximovalor(m))
+}
+d) proc interseccionMultiple(in ls : seqhseqhRii, out l : seqhRi) que devuelve en l el resultado de la intersecci´on de todas las
+secuencias de ls.
+e) F Dada una secuencia l con todos sus elementos distintos, devolver la secuencia de partes, es decir, la secuencia de todas las
+secuencias incluidas en l, cada una con sus elementos en el mismo orden en que aparecen en l.
+
+
+Ejercicio 17. F Dados dos enteros a y b, se necesita calcular su suma, y retornarla en un entero c. ¿C´uales de las siguientes
+especificaciones son correctas para este problema? Para las que no lo son, indicar por qu´e
+a)inout estan mal hecho
+b)triple in y ningun out 
+c)ta bien 
+d)sacamos a y b al pedisimo 
+
+Ejercicio 18. F Dada una secuencia l, se desea sacar su primer elemento y devolverlo. Decidir c´uales de estas especificaciones
+son correctas. Para las que no lo son, indicar por qu´e y justificar con ejemplos.
+a) No se esta sacando el primer elemento de l, meramente se lo extrae
+b) No se esta sacando el primer elemento de l, meramente se lo extrae
+c) No se guarda el valor inicial de L, por lo tanto no se sabe que ser´ıa L0
+d)correcto 
+e)correcto 
+
+Ejercicio 19. Considerar la siguiente especificacion:
+proc intercambiar (inout l: seqhRi, in i, j: Z) {
+Pre {0 ≤ i < |l| ∧ 0 ≤ j < |l| ∧ l = L0}
+Post {
+/*Las secuencias tienen la misma longitud*/
+|l| = |L0|
+∧
+/*Intercambia i*/
+l[i] = L0[j]
+∧
+/*Intercambia j*/
+l[j] = L0[i]
+}
+}
+a) ¿Esta especificacion es valida? Si lo es, ¿que problema describe?swap
+b) Mostrar con un ejemplo que la postcondicion esta sub-especificada (es decir, que hay valores que la hacen verdadera aunque
+no son deseables como solucion).#no dice nada de las otras posicion
+c) Corregir la especificacion agregando a la postcondicion una o mas clausulas Pos
+agrego un (∀j:Z)(0 ≤ h < |l| ∧ h!=i ∧ h!=j ⇒L l[h]=l0[h])
+
+Ejercicio 20. Explicar coloquialmente la siguiente especificaci´on:
+proc copiarPrimero (inout l:seqhZi, inout i:Z) {
+Pre {
+l = L0 ∧ i = I0 ∧ |l| > 0 ∧ 0 ≤ i < |l|
+}
+Post {
+l[I0] = L0[0] ∧ i = L0[I0] ∧ ((∀j : Z)((0 ≤ j < |l| ∧ j != I0) →L l[j] = L0[I0])
+}
+}
+*lo hice mentalmente*
+Ejercicio 21. Dada una secuencia de enteros, se requiere multiplicar por 2 aqu´ellos valores que se encuentran en posiciones
+pares. Indicar por qu´e son incorrectas las siguientes especificaciones, y proponer una alternativa correcta.
+*lo hice mentalmente*
