@@ -1,0 +1,10 @@
+Ejercicio 1.  Calcular las siguientes expresiones, donde a, b son variables reales, i una variable entera y A es una secuencia
+de reales.
+
+a) def(a + 1). true
+b) def(a/b). aca depende de b si es o no 0
+c) def(sqrt(a/b)).aca depende si alguno es negativo o no ademas del caso de 0 
+d) def(A[i] + 1). tiene que definir donde vive i  y a A
+e) def(A[i + 2]). tiene que definir donde  i + 2 y a A 
+f) def(0 ≤ i ≤ |A|). true
+g) def(0 ≤ i ≤ |A| ∧L A[i] ≥ 0).aca tiene que ver que i != |A|
