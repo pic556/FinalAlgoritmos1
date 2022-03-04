@@ -8,3 +8,21 @@ d) def(A[i] + 1). tiene que definir donde vive i  y a A
 e) def(A[i + 2]). tiene que definir donde  i + 2 y a A 
 f) def(0 ≤ i ≤ |A|). true
 g) def(0 ≤ i ≤ |A| ∧L A[i] ≥ 0).aca tiene que ver que i != |A|
+
+Ejercicio 2. Calcular las siguientes precondiciones m´as d´ebiles, donde a, b son variables reales, i una variable entera y A es
+una secuencia de reales
+
+a) wp(a := a+1, a ≥ 0).
+def(a+1) ∧ a+1 => 0
+a ≥-1
+b) wp(a := a/b, a ≥ 0).
+def(a/b) ∧ b != 0 ∧ a/b ≥ 0
+
+c) wp(a := A[i], a ≥ 0).
+def( 0 ≤ i < |A|) ∧L A[i]≥0
+
+d) wp(a := b*b, a ≥ 0).
+def(b*b) ∧ b ≥0
+
+e) wp(b := b+1, a ≥ 0).
+def(b+1) ∧ a ≥ 0
